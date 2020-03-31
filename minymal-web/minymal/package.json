@@ -1,5 +1,6 @@
 {
   "name": "minymal",
+  "homepage": "http://ozmds.github.io/minymal",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
