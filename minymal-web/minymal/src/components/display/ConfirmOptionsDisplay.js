@@ -70,7 +70,7 @@ function ConfirmOptionsDisplay(props) {
                 }
             </Grid>
             <Button
-                onClick={props.onClick}
+                onClick={props.onSubmit}
                 variant='contained'
                 color='primary'
                 size='large'
@@ -87,7 +87,7 @@ ConfirmOptionsDisplay.propTypes = {
     subtitle: PropTypes.string,
     goals: PropTypes.array,
     onChange: PropTypes.func,
-    onClick: PropTypes.func,
+    onSubmit: PropTypes.func,
     addField: PropTypes.func,
     classes: PropTypes.object
 };

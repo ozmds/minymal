@@ -19,7 +19,7 @@ function Intro(props) {
                 {'Minimalist-minded planning for all goals, small and large.'}
             </Typography>
             <Button
-                onClick={() => props.onClick('goals')}
+                onClick={() => props.setQuestion('goals')}
                 variant='contained'
                 color='primary'
                 className={classes.button}
@@ -31,7 +31,7 @@ function Intro(props) {
 }
 
 Intro.propTypes = {
-    onClick: PropTypes.func,
+    setQuestion: PropTypes.func,
     classes: PropTypes.object
 };
 

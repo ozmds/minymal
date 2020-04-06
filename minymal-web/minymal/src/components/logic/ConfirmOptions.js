@@ -6,7 +6,7 @@ class ConfirmOptions extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            goals: this.props.goals
+            goals: this.props.options
         };
     }
 
@@ -18,8 +18,8 @@ class ConfirmOptions extends Component {
 
     onSubmit = () => {
         const goalList = this.state.goals.filter((x) => x !== '');
-        this.props.onSubmit(goalList);
-        this.props.onClick(this.props.nextScreen);
+        this.props.submitSelection(goalList);
+        this.props.setQuestion(this.props.nextScreen);
     }
 
     addField = () => {
@@ -31,7 +31,7 @@ class ConfirmOptions extends Component {
             <ConfirmOptionsDisplay
                 question={this.props.question}
                 subtitle={this.props.subtitle}
-                onClick={this.onSubmit}
+                onSubmit={this.onSubmit}
                 onChange={this.onChange}
                 goals={this.state.goals}
                 addField={this.addField}
@@ -44,9 +44,9 @@ ConfirmOptions.propTypes = {
     question: PropTypes.string,
     subtitle: PropTypes.string,
     nextScreen: PropTypes.string,
-    goals: PropTypes.array,
-    onClick: PropTypes.func,
-    onSubmit: PropTypes.func
+    options: PropTypes.array,
+    setQuestion: PropTypes.func,
+    submitSelection: PropTypes.func
 };
 
 export default ConfirmOptions;

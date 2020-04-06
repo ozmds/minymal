@@ -29,8 +29,8 @@ class CardOptions extends Component {
         if (otherIndex !== -1) {
             goalsList.splice(otherIndex, 1, '');
         }
-        this.props.onSubmit(goalsList);
-        this.props.onClick(this.props.nextScreen);
+        this.props.submitSelection(goalsList);
+        this.props.setQuestion(this.props.nextScreen);
     }
 
     render() {
@@ -52,8 +52,8 @@ CardOptions.propTypes = {
     imageTitles: PropTypes.array,
     nextScreen: PropTypes.string,
     question: PropTypes.string,
-    onClick: PropTypes.func,
-    onSubmit: PropTypes.func
+    setQuestion: PropTypes.func,
+    submitSelection: PropTypes.func
 };
 
 export default CardOptions;

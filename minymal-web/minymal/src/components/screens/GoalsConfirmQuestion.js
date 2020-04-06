@@ -8,17 +8,17 @@ function GoalsConfirmQuestion(props) {
             question={"Are there any other goals you'd like to add?"}
             subtitle={"(If you'd like to edit any existing goals, let's do that too.)"}
             nextScreen={'intro'}
-            goals={props.goals}
-            onClick={props.onClick}
-            onSubmit={props.onSubmit}
+            options={props.goals}
+            setQuestion={props.setQuestion}
+            submitSelection={props.setGoals}
         />
     );
 }
 
 GoalsConfirmQuestion.propTypes = {
     goals: PropTypes.array,
-    onClick: PropTypes.func,
-    onSubmit: PropTypes.func
+    setQuestion: PropTypes.func,
+    setGoals: PropTypes.func
 };
 
 export default GoalsConfirmQuestion;

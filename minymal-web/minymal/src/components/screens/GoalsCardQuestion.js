@@ -25,15 +25,15 @@ function GoalsCardQuestion(props) {
             imageTitles={imageTitles}
             nextScreen={'textgoals'}
             question={'What are your goals?'}
-            onClick={props.onClick}
-            onSubmit={props.onSubmit}
+            setQuestion={props.setQuestion}
+            submitSelection={props.setGoals}
         />
     );
 }
 
 GoalsCardQuestion.propTypes = {
-    onClick: PropTypes.func,
-    onSubmit: PropTypes.func
+    setQuestion: PropTypes.func,
+    setGoals: PropTypes.func
 };
 
 export default GoalsCardQuestion;
