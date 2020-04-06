@@ -11,7 +11,8 @@ module.exports = {
         "jsx-quotes": ["error", "prefer-single"],
         "react/jsx-no-literals": ["error"],
         "react/jsx-indent" : ["error", 4],
-        "react/jsx-indent-props": ["error", 4]
+        "react/jsx-indent-props": ["error", 4],
+        "max-lines": ["error", 80]
     },
     "env": {
         "browser": true

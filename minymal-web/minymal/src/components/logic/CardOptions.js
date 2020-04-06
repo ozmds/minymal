@@ -1,24 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import CardOptions from '../display/CardOptions';
-import Other from '../../static/other.jpg';
-import Writing from '../../static/writing.jpg';
-import Fitness from '../../static/fitness.jpg';
-import Cooking from '../../static/cooking.jpg';
-import Code from '../../static/code.jpg';
-import Piano from '../../static/piano.jpg';
+import CardOptionsDisplay from '../display/CardOptionsDisplay';
 
-const imagePaths = [Piano, Code, Cooking, Fitness, Writing, Other];
-const imageTitles = [
-    'Learn an Instrument',
-    'Build an App',
-    'Learn to Cook',
-    'Get Healthier',
-    'Write a Novel',
-    'Other Goals'
-];
-
-class GoalsCardQuestion extends Component {
+class CardOptions extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -39,20 +23,22 @@ class GoalsCardQuestion extends Component {
 
     onSubmit = () => {
         const sortedIndex = [...this.state.selected].sort((a, b) => a - b);
-        const goalsList = sortedIndex.map((x) => imageTitles[x]);
-        const otherIndex = goalsList.indexOf('Other Goals');
+        const goalsList = sortedIndex.map((x) => this.props.imageTitles[x]);
+        const otherText = this.props.imageTitles[this.props.imageTitles.length - 1];
+        const otherIndex = goalsList.indexOf(otherText);
         if (otherIndex !== -1) {
             goalsList.splice(otherIndex, 1, '');
         }
         this.props.onSubmit(goalsList);
-        this.props.onClick('textgoals');
+        this.props.onClick(this.props.nextScreen);
     }
 
     render() {
         return (
-            <CardOptions
-                imagePaths={imagePaths}
-                imageTitles={imageTitles}
+            <CardOptionsDisplay
+                question={this.props.question}
+                imagePaths={this.props.imagePaths}
+                imageTitles={this.props.imageTitles}
                 onSubmit={this.onSubmit}
                 manageSelection={this.manageSelection}
                 selected={this.state.selected}
@@ -61,9 +47,13 @@ class GoalsCardQuestion extends Component {
     }
 }
 
-GoalsCardQuestion.propTypes = {
+CardOptions.propTypes = {
+    imagePaths: PropTypes.array,
+    imageTitles: PropTypes.array,
+    nextScreen: PropTypes.string,
+    question: PropTypes.string,
     onClick: PropTypes.func,
     onSubmit: PropTypes.func
 };
 
-export default GoalsCardQuestion;
+export default CardOptions;

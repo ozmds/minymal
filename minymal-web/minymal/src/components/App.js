@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import Collapse from '@material-ui/core/Collapse';
 import MinymalTheme from './display/MinymalTheme';
-import Questionnaire from './display/Questionnaire';
+import Questionnaire from './screens/Questionnaire';
 import Header from './screens/Header';
 import Intro from './screens/Intro';
-import GoalsCardQuestion from './logic/GoalsCardQuestion';
-import GoalsConfirmQuestion from './logic/GoalsConfirmQuestion';
+import GoalsCardQuestion from './screens/GoalsCardQuestion';
+import GoalsConfirmQuestion from './screens/GoalsConfirmQuestion';
 
 class App extends Component {
     constructor(props) {

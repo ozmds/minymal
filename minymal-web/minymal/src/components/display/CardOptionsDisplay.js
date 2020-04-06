@@ -63,11 +63,11 @@ const styles = {
     }
 };
 
-function CardOptions(props) {
+function CardOptionsDisplay(props) {
     const { classes } = props;
     return (
         <Container className={classes.root}>
-            <Typography variant='h4'>{'What are your goals?'}</Typography>
+            <Typography variant='h4'>{props.question}</Typography>
             <Grid
                 spacing={3}
                 container
@@ -130,7 +130,8 @@ function CardOptions(props) {
     );
 }
 
-CardOptions.propTypes = {
+CardOptionsDisplay.propTypes = {
+    question: PropTypes.string,
     selected: PropTypes.array,
     imagePaths: PropTypes.array,
     imageTitles: PropTypes.array,
@@ -139,4 +140,4 @@ CardOptions.propTypes = {
     classes: PropTypes.object
 };
 
-export default withStyles(styles)(CardOptions);
+export default withStyles(styles)(CardOptionsDisplay);

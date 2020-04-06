@@ -30,15 +30,15 @@ const styles = {
     }
 };
 
-function ConfirmOptions(props) {
+function ConfirmOptionsDisplay(props) {
     const { classes } = props;
     return (
         <Container className={classes.root}>
             <Typography variant='h5'>
-                {"Are there any other goals you'd like to add?"}
+                {props.question}
             </Typography>
             <Typography className={classes.heading} variant='subtitle1'>
-                {"(If you'd like to edit any existing goals, let's do that too.)"}
+                {props.subtitle}
             </Typography>
             <Grid
                 spacing={3}
@@ -82,7 +82,9 @@ function ConfirmOptions(props) {
     );
 }
 
-ConfirmOptions.propTypes = {
+ConfirmOptionsDisplay.propTypes = {
+    question: PropTypes.string,
+    subtitle: PropTypes.string,
     goals: PropTypes.array,
     onChange: PropTypes.func,
     onClick: PropTypes.func,
@@ -90,4 +92,4 @@ ConfirmOptions.propTypes = {
     classes: PropTypes.object
 };
 
-export default withStyles(styles)(ConfirmOptions);
+export default withStyles(styles)(ConfirmOptionsDisplay);

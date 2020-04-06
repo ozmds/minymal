@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ConfirmOptions from '../display/ConfirmOptions';
+import ConfirmOptionsDisplay from '../display/ConfirmOptionsDisplay';
 
-class GoalsConfirmQuestion extends Component {
+class ConfirmOptions extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -19,7 +19,7 @@ class GoalsConfirmQuestion extends Component {
     onSubmit = () => {
         const goalList = this.state.goals.filter((x) => x !== '');
         this.props.onSubmit(goalList);
-        this.props.onClick('intro');
+        this.props.onClick(this.props.nextScreen);
     }
 
     addField = () => {
@@ -28,7 +28,9 @@ class GoalsConfirmQuestion extends Component {
 
     render() {
         return (
-            <ConfirmOptions
+            <ConfirmOptionsDisplay
+                question={this.props.question}
+                subtitle={this.props.subtitle}
                 onClick={this.onSubmit}
                 onChange={this.onChange}
                 goals={this.state.goals}
@@ -38,10 +40,13 @@ class GoalsConfirmQuestion extends Component {
     }
 }
 
-GoalsConfirmQuestion.propTypes = {
+ConfirmOptions.propTypes = {
+    question: PropTypes.string,
+    subtitle: PropTypes.string,
+    nextScreen: PropTypes.string,
     goals: PropTypes.array,
     onClick: PropTypes.func,
     onSubmit: PropTypes.func
 };
 
-export default GoalsConfirmQuestion;
+export default ConfirmOptions;
