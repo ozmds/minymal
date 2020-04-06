@@ -12,5 +12,8 @@ module.exports = {
         "react/jsx-no-literals": ["error"],
         "react/jsx-indent" : ["error", 4],
         "react/jsx-indent-props": ["error", 4]
+    },
+    "env": {
+        "browser": true
     }
 };

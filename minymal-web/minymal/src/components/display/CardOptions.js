@@ -7,7 +7,6 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Grid from '@material-ui/core/Grid';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import Button from '@material-ui/core/Button';
-import Collapse from '@material-ui/core/Collapse';
 import { withStyles } from '@material-ui/core/styles';
 import Slide from '@material-ui/core/Slide';
 import PropTypes from 'prop-types';
@@ -27,7 +26,9 @@ const styles = {
     },
     grid: {
         height: '100%',
-        flex: '1'
+        flex: '1',
+        marginTop: '1.5rem',
+        marginBottom: '1.5rem'
     },
     fullContainer: {
         height: '100%'
@@ -65,75 +66,67 @@ const styles = {
 function CardOptions(props) {
     const { classes } = props;
     return (
-        <Collapse
-            in={props.question === 'goals'}
-            timeout={1500}
-            mountOnEnter
-            unmountOnExit
-        >
-            <Container className={classes.root}>
-                <Typography variant='h4'>{'What are your goals?'}</Typography>
-                <Grid
-                    spacing={3}
-                    container
-                    style={{ margin: '0rem', padding: '0.75rem' }}
-                    className={classes.grid}
-                >
-                    {props.imagePaths.map((image, i) => (
-                        <Grid key={props.imageTitles[i]} item xs={6}>
-                            <Card className={classes.card}>
-                                <CardActionArea
-                                    className={classes.fullContainer}
+        <Container className={classes.root}>
+            <Typography variant='h4'>{'What are your goals?'}</Typography>
+            <Grid
+                spacing={3}
+                container
+                className={classes.grid}
+            >
+                {props.imagePaths.map((image, i) => (
+                    <Grid key={props.imageTitles[i]} item xs={6}>
+                        <Card className={classes.card}>
+                            <CardActionArea
+                                className={classes.fullContainer}
+                            >
+                                <CardMedia
+                                    image={image}
+                                    title={props.imageTitles[i]}
+                                    className={classes.image}
+                                />
+                            </CardActionArea>
+                            <Slide
+                                mountOnEnter
+                                unmountOnExit
+                                in={!props.selected.includes(i)}
+                                timeout={{ enter: 1500, exit: 1500 }}
+                            >
+                                <Container
+                                    className={classes.overlay}
+                                    onClick={() => props.manageSelection(i)}
                                 >
-                                    <CardMedia
-                                        image={image}
-                                        title={props.imageTitles[i]}
-                                        className={classes.image}
-                                    />
-                                </CardActionArea>
-                                <Slide
-                                    mountOnEnter
-                                    unmountOnExit
-                                    in={!props.selected.includes(i)}
-                                    timeout={{ enter: 1500, exit: 1500 }}
+                                    <Typography variant='h4'>
+                                        <strong>{props.imageTitles[i]}</strong>
+                                    </Typography>
+                                </Container>
+                            </Slide>
+                            <Slide
+                                mountOnEnter
+                                unmountOnExit
+                                in={props.selected.includes(i)}
+                                timeout={1500}
+                            >
+                                <Container
+                                    className={classes.overlay}
+                                    onClick={() => props.manageSelection(i)}
                                 >
-                                    <Container
-                                        className={classes.overlay}
-                                        onClick={() => props.manageSelection(i)}
-                                    >
-                                        <Typography variant='h4'>
-                                            <strong>{props.imageTitles[i]}</strong>
-                                        </Typography>
-                                    </Container>
-                                </Slide>
-                                <Slide
-                                    mountOnEnter
-                                    unmountOnExit
-                                    in={props.selected.includes(i)}
-                                    timeout={1500}
-                                >
-                                    <Container
-                                        className={classes.overlay}
-                                        onClick={() => props.manageSelection(i)}
-                                    >
-                                        <CheckBoxIcon className={classes.checkOverlay} />
-                                    </Container>
-                                </Slide>
-                            </Card>
-                        </Grid>
-                    ))}
-                </Grid>
-                <Button
-                    onClick={props.onSubmit}
-                    className={classes.button}
-                    variant='contained'
-                    color='primary'
-                    size='large'
-                >
-                    {'Next'}
-                </Button>
-            </Container>
-        </Collapse>
+                                    <CheckBoxIcon className={classes.checkOverlay} />
+                                </Container>
+                            </Slide>
+                        </Card>
+                    </Grid>
+                ))}
+            </Grid>
+            <Button
+                onClick={props.onSubmit}
+                className={classes.button}
+                variant='contained'
+                color='primary'
+                size='large'
+            >
+                {'Continue'}
+            </Button>
+        </Container>
     );
 }
 
@@ -141,7 +134,6 @@ CardOptions.propTypes = {
     selected: PropTypes.array,
     imagePaths: PropTypes.array,
     imageTitles: PropTypes.array,
-    question: PropTypes.string,
     onSubmit: PropTypes.func,
     manageSelection: PropTypes.func,
     classes: PropTypes.object

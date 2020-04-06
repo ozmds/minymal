@@ -35,12 +35,16 @@ class GoalsCardQuestion extends Component {
             newState.splice(index, 1);
             this.setState({ selected: newState });
         }
-    };
+    }
 
     onSubmit = () => {
         const sortedIndex = [...this.state.selected].sort((a, b) => a - b);
-        const goalList = sortedIndex.map((x) => imageTitles[x]).filter((x) => x !== 'Other Goals');
-        this.props.onSubmit(goalList);
+        const goalsList = sortedIndex.map((x) => imageTitles[x]);
+        const otherIndex = goalsList.indexOf('Other Goals');
+        if (otherIndex !== -1) {
+            goalsList.splice(otherIndex, 1, '');
+        }
+        this.props.onSubmit(goalsList);
         this.props.onClick('textgoals');
     }
 
@@ -49,7 +53,6 @@ class GoalsCardQuestion extends Component {
             <CardOptions
                 imagePaths={imagePaths}
                 imageTitles={imageTitles}
-                question={this.props.question}
                 onSubmit={this.onSubmit}
                 manageSelection={this.manageSelection}
                 selected={this.state.selected}
@@ -59,7 +62,6 @@ class GoalsCardQuestion extends Component {
 }
 
 GoalsCardQuestion.propTypes = {
-    question: PropTypes.string,
     onClick: PropTypes.func,
     onSubmit: PropTypes.func
 };

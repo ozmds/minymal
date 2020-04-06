@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import Collapse from '@material-ui/core/Collapse';
 import MinymalTheme from './display/MinymalTheme';
 import Questionnaire from './display/Questionnaire';
-import Header from './display/Header';
-import Intro from './display/Intro';
+import Header from './screens/Header';
+import Intro from './screens/Intro';
 import GoalsCardQuestion from './logic/GoalsCardQuestion';
-import ConfirmOptions from './display/ConfirmOptions';
+import GoalsConfirmQuestion from './logic/GoalsConfirmQuestion';
 
 class App extends Component {
     constructor(props) {
@@ -27,23 +28,40 @@ class App extends Component {
         return (
             <MinymalTheme>
                 <Questionnaire>
-                    <Header value={'Minymal'} />
-                    <Intro
-                        introText={'Minimalist-minded planning for all goals, small and large.'}
-                        buttonText={"Let's Get Started"}
-                        question={this.state.question}
-                        onClick={this.nextQuestion}
-                    />
-                    <GoalsCardQuestion
-                        question={this.state.question}
-                        onClick={this.nextQuestion}
-                        onSubmit={this.submitGoals}
-                    />
-                    <ConfirmOptions
-                        question={this.state.question}
-                        onClick={this.nextQuestion}
-                        goals={this.state.goals}
-                    />
+                    <Header />
+                    <Collapse
+                        in={this.state.question === 'intro'}
+                        timeout={1500}
+                        mountOnEnter
+                        unmountOnExit
+                    >
+                        <Intro
+                            onClick={this.nextQuestion}
+                        />
+                    </Collapse>
+                    <Collapse
+                        in={this.state.question === 'goals'}
+                        timeout={1500}
+                        mountOnEnter
+                        unmountOnExit
+                    >
+                        <GoalsCardQuestion
+                            onClick={this.nextQuestion}
+                            onSubmit={this.submitGoals}
+                        />
+                    </Collapse>
+                    <Collapse
+                        in={this.state.question === 'textgoals'}
+                        timeout={1500}
+                        mountOnEnter
+                        unmountOnExit
+                    >
+                        <GoalsConfirmQuestion
+                            onClick={this.nextQuestion}
+                            goals={this.state.goals}
+                            onSubmit={this.submitGoals}
+                        />
+                    </Collapse>
                 </Questionnaire>
             </MinymalTheme>
         );
