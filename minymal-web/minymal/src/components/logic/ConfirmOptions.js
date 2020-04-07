@@ -26,6 +26,12 @@ class ConfirmOptions extends Component {
         this.setState({ goals: [...this.state.goals, ''] });
     }
 
+    removeField = (fieldIndex) => {
+        const newState = [...this.state.goals];
+        newState.splice(fieldIndex, 1);
+        this.setState({ goals: newState });
+    }
+
     render() {
         return (
             <ConfirmOptionsDisplay
@@ -35,6 +41,7 @@ class ConfirmOptions extends Component {
                 onChange={this.onChange}
                 goals={this.state.goals}
                 addField={this.addField}
+                removeField={this.removeField}
             />
         );
     }

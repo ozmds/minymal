@@ -5,8 +5,11 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
 import PropTypes from 'prop-types';
 import AddIcon from '@material-ui/icons/Add';
+import DeleteIcon from '@material-ui/icons/Delete';
+
 
 const styles = {
     root: {
@@ -15,11 +18,14 @@ const styles = {
     grid: {
         width: '70%'
     },
+    gridItem: {
+        display: 'flex'
+    },
     heading: {
         marginBottom: '1.5rem'
     },
     input: {
-        width: '100%'
+        flex: 1
     },
     icon: {
         width: '2rem',
@@ -46,7 +52,7 @@ function ConfirmOptionsDisplay(props) {
                 className={classes.grid}
             >
                 {props.goals.map((goal, i) => (
-                    <Grid key={i} item xs={6}>
+                    <Grid key={i} item xs={6} className={classes.gridItem}>
                         <TextField
                             className={classes.input}
                             id='outlined-basic'
@@ -55,10 +61,13 @@ function ConfirmOptionsDisplay(props) {
                             value={goal}
                             onChange={(e) => props.onChange(e, i)}
                         />
+                        <IconButton onClick={() => props.removeField(i)}>
+                            <DeleteIcon />
+                        </IconButton>
                     </Grid>
                 ))}
                 {props.goals.length < 6
-                    && <Grid item xs={6}>
+                    && <Grid item xs={12}>
                         <Button
                             style={{ width: '100%', height: '100%' }}
                             variant='outlined'
@@ -89,6 +98,7 @@ ConfirmOptionsDisplay.propTypes = {
     onChange: PropTypes.func,
     onSubmit: PropTypes.func,
     addField: PropTypes.func,
+    removeField: PropTypes.func,
     classes: PropTypes.object
 };
 
