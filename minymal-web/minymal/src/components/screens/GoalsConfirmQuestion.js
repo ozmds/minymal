@@ -7,7 +7,7 @@ function GoalsConfirmQuestion(props) {
         <ConfirmOptions
             question={"Are there any other goals you'd like to add?"}
             subtitle={"(If you'd like to edit any existing goals, let's do that too.)"}
-            nextScreen={'intro'}
+            nextScreen={'timespenders'}
             options={props.goals}
             setQuestion={props.setQuestion}
             submitSelection={props.setGoals}

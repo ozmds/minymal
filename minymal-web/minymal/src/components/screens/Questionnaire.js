@@ -7,6 +7,7 @@ import Header from './Header';
 import Intro from './Intro';
 import GoalsCardQuestion from './GoalsCardQuestion';
 import GoalsConfirmQuestion from './GoalsConfirmQuestion';
+import TimeSpendCardQuestion from './TimeSpendCardQuestion';
 
 const styles = {
     container: {
@@ -40,6 +41,12 @@ function Questionnaire(props) {
                     goals={props.goals}
                 />
             </Collapse>
+            <Collapse condition={props.question === 'timespenders'}>
+                <TimeSpendCardQuestion
+                    setQuestion={props.setQuestion}
+                    setTimeSpenders={props.setTimeSpenders}
+                />
+            </Collapse>
         </Container>
     );
 }
@@ -49,6 +56,7 @@ Questionnaire.propTypes = {
     goals: PropTypes.array,
     setQuestion: PropTypes.func,
     setGoals: PropTypes.func,
+    setTimeSpenders: PropTypes.func,
     classes: PropTypes.object
 };
 
