@@ -11,12 +11,14 @@ import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 
-const styles = {
+const styles = (theme) => ({
     root: {
         marginTop: '2rem'
     },
     grid: {
-        width: '70%'
+        [theme.breakpoints.up('lg')]: {
+            width: '70%'
+        }
     },
     gridItem: {
         display: 'flex'
@@ -34,7 +36,7 @@ const styles = {
     button: {
         marginTop: '1.5rem'
     }
-};
+});
 
 function ConfirmOptionsDisplay(props) {
     const { classes } = props;
@@ -52,7 +54,7 @@ function ConfirmOptionsDisplay(props) {
                 className={classes.grid}
             >
                 {props.options.map((goal, i) => (
-                    <Grid key={i} item xs={6} className={classes.gridItem}>
+                    <Grid key={i} item xs={12} lg={6} className={classes.gridItem}>
                         <TextField
                             className={classes.input}
                             id='outlined-basic'

@@ -11,18 +11,15 @@ import { withStyles } from '@material-ui/core/styles';
 import Slide from '@material-ui/core/Slide';
 import PropTypes from 'prop-types';
 
-const styles = {
+const styles = (theme) => ({
     root: {
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        height: '75vh',
+        [theme.breakpoints.up('lg')]: {
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            height: '75vh'
+        },
         marginTop: '2rem'
-    },
-    image: {
-        width: '100%',
-        height: '100%',
-        objectFit: 'cover'
     },
     grid: {
         height: '100%',
@@ -30,14 +27,21 @@ const styles = {
         marginTop: '1.5rem',
         marginBottom: '1.5rem'
     },
+    card: {
+        [theme.breakpoints.down('lg')]: {
+            height: '15rem'
+        },
+        position: 'relative',
+        cursor: 'pointer',
+        height: '100%'
+    },
     fullContainer: {
         height: '100%'
     },
-    fillContainer: {
-        flex: '1',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center'
+    image: {
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover'
     },
     overlay: {
         position: 'absolute',
@@ -53,15 +57,10 @@ const styles = {
         width: '100%',
         height: '100%'
     },
-    card: {
-        position: 'relative',
-        cursor: 'pointer',
-        height: '100%'
-    },
-    wrapper: {
-        height: '80%'
+    button: {
+        marginBottom: '1rem'
     }
-};
+});
 
 function CardOptionsDisplay(props) {
     const { classes } = props;
@@ -74,7 +73,7 @@ function CardOptionsDisplay(props) {
                 className={classes.grid}
             >
                 {props.imagePaths.map((image, i) => (
-                    <Grid key={props.imageTitles[i]} item xs={6}>
+                    <Grid key={props.imageTitles[i]} item xs={12} lg={6}>
                         <Card className={classes.card}>
                             <CardActionArea
                                 className={classes.fullContainer}
