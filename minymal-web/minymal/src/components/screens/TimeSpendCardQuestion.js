@@ -6,6 +6,12 @@ import Fitness from '../../static/fitness.jpg';
 import Cooking from '../../static/cooking.jpg';
 import Code from '../../static/code.jpg';
 import Piano from '../../static/piano.jpg';
+import TimeSpendOther from '../../static/timespendother.jpg';
+import School from '../../static/school.jpg';
+import ScreenTime from '../../static/screentime.jpg';
+import Sleep from '../../static/sleep.jpg';
+import Transit from '../../static/transit.jpg';
+import Work from '../../static/work.jpg';
 import CardOptions from '../logic/CardOptions';
 
 const imagePaths = [Piano, Code, Cooking, Fitness, Writing, Other];
