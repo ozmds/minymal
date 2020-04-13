@@ -7,7 +7,7 @@ function TimeSpendConfirmQuestion(props) {
         <ConfirmOptions
             question={"Are there any other time-spenders you'd like to add?"}
             subtitle={"(If you'd like to edit any existing time-spenders, let's do that too.)"}
-            nextScreen={'intro'}
+            nextScreen={'timeselect'}
             options={props.timeSpenders}
             setQuestion={props.setQuestion}
             submitSelection={props.setTimeSpenders}

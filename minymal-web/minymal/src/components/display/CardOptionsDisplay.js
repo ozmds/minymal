@@ -17,7 +17,7 @@ const styles = (theme) => ({
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
-            height: '75vh'
+            height: '80vh'
         },
         marginTop: '2rem'
     },
@@ -28,7 +28,7 @@ const styles = (theme) => ({
         marginBottom: '1.5rem'
     },
     card: {
-        [theme.breakpoints.down('lg')]: {
+        [theme.breakpoints.down('md')]: {
             height: '15rem'
         },
         position: 'relative',

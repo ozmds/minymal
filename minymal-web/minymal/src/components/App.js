@@ -8,7 +8,8 @@ class App extends Component {
         this.state = {
             question: 'intro',
             goals: [],
-            timespenders: []
+            timespenders: [],
+            selectedtime: []
         };
     }
 
@@ -24,6 +25,10 @@ class App extends Component {
         this.setState({ timespenders: timeSpenders });
     }
 
+    setSelectedTime = (selectedTime) => {
+        this.setState({ selectedtime: selectedTime });
+    }
+
     render() {
         return (
             <MinymalTheme>
@@ -34,6 +39,7 @@ class App extends Component {
                     setQuestion={this.setQuestion}
                     setGoals={this.setGoals}
                     setTimeSpenders={this.setTimeSpenders}
+                    setSelectedTime={this.setSelectedTime}
                 />
             </MinymalTheme>
         );

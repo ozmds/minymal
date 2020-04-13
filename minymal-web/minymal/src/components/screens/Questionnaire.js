@@ -9,6 +9,7 @@ import GoalsCardQuestion from './GoalsCardQuestion';
 import GoalsConfirmQuestion from './GoalsConfirmQuestion';
 import TimeSpendCardQuestion from './TimeSpendCardQuestion';
 import TimeSpendConfirmQuestion from './TimeSpendConfirmQuestion';
+import TimeSpendSelectQuestion from './TimeSpendSelectQuestion';
 
 const styles = {
     container: {
@@ -24,7 +25,7 @@ function Questionnaire(props) {
     return (
         <Container className={classes.container}>
             <Header />
-            <Collapse condition={props.question === 'intro'}>
+            <Collapse condition={props.question === 'old_intro'}>
                 <Intro
                     setQuestion={props.setQuestion}
                 />
@@ -42,7 +43,7 @@ function Questionnaire(props) {
                     goals={props.goals}
                 />
             </Collapse>
-            <Collapse condition={props.question === 'timespenders'}>
+            <Collapse condition={props.question === 'intro'}>
                 <TimeSpendCardQuestion
                     setQuestion={props.setQuestion}
                     setTimeSpenders={props.setTimeSpenders}
@@ -53,6 +54,13 @@ function Questionnaire(props) {
                     setQuestion={props.setQuestion}
                     setTimeSpenders={props.setTimeSpenders}
                     timeSpenders={props.timeSpenders}
+                />
+            </Collapse>
+            <Collapse condition={props.question === 'timeselect'}>
+                <TimeSpendSelectQuestion
+                    timeSpenders={props.timeSpenders}
+                    setSelectedTime={props.setSelectedTime}
+                    setQuestion={props.setQuestion}
                 />
             </Collapse>
         </Container>
@@ -66,6 +74,7 @@ Questionnaire.propTypes = {
     setQuestion: PropTypes.func,
     setGoals: PropTypes.func,
     setTimeSpenders: PropTypes.func,
+    setSelectedTime: PropTypes.func,
     classes: PropTypes.object
 };
 
