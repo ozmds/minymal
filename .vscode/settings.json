@@ -1,0 +1,11 @@
+{
+    "python.linting.flake8Enabled": true,
+    "python.linting.pylintEnabled": false,
+    "python.linting.enabled": true,
+    "python.pythonPath": "minymal-web/tests/venv/bin/python",
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.colorTheme": "One Dark Pro",
+    "editor.detectIndentation": false,
+    "eslint.codeActionsOnSave.mode": "problems"
+}

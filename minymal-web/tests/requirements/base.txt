@@ -1,1 +1,6 @@
 selenium==3.141.0
+flake8-print==3.1.4
+flake8==3.7.9
+pep8-naming==0.10.0
+radon==4.1.0
+flake8-lineleak==1.0.2
