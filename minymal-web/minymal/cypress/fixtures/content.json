@@ -1,0 +1,60 @@
+{
+    "questionnaire": {
+        "heading": "Minymal",
+        "welcome": {
+            "intro": "Minimalist-minded planning for all goals, small and large.",
+            "button": "Let's Get Started"
+        },
+        "goalsCard": {
+            "question": "What are your goals?",
+            "button": "Continue",
+            "images": [
+                "Learn an Instrument",
+                "Build an App",
+                "Learn to Cook",
+                "Get Healthier",
+                "Write a Novel",
+                "Other Goals"
+            ]
+        },
+        "goalsConfirm": {
+            "question": "Are there any other goals you'd like to add?",
+            "additionalText": "(If you'd like to edit any existing goals, let's do that too.)",
+            "fieldLabel": "Goal",
+            "button": "Continue",
+            "maxFields": 6,
+            "error": {
+                "atLeastOne": "You must add at least one goal.",
+                "tooMany": "Currently you can only add up to 6 goals, more will be available later."
+            }
+        },
+        "timeSpentCard": {
+            "question": "How do you spend most of your time?",
+            "button": "Continue",
+            "backButton": "Back to Change Goals",
+            "images": [
+                "Sleep",
+                "Work",
+                "School",
+                "Transit",
+                "Screen Time",
+                "Other"
+            ]
+        },
+        "timeSpentConfirm": {
+            "question": "Are there any other time spenders you'd like to add?",
+            "additionalText": "(If you'd like to edit any existing time spenders, let's do that too.)",
+            "fieldLabel": "Time Spender",
+            "button": "Continue",
+            "backButton": "Back to Change Goals",
+            "maxFields": 10,
+            "error": {
+                "atLeastOne": "You must add at least one time spender.",
+                "tooMany": "Currently you can only add up to 10 time spenders, more will be available later."
+            }
+        },
+        "timeSpentAllocate": {
+            "question": "When are you doing these activities?"
+        }
+    }
+}
