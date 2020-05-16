@@ -2,9 +2,13 @@ import React from 'react';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 
+/* fontFamily: '"Playfair Display", "Helvetica", "Arial", sans-serif' */
+/* fontFamily: '"Jost", "Arial", sans-serif' */
+
+
 const theme = createMuiTheme({
     typography: {
-        fontFamily: '"Playfair Display", "Helvetica", "Arial", sans-serif'
+        fontFamily: '"Didact Gothic", sans-serif'
     }
 });
 

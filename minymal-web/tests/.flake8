@@ -1,4 +1,0 @@
-[flake8]
-radon-max-cc = 3
-jobs = 1
-exclude = venv

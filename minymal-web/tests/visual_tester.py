@@ -17,11 +17,10 @@ def take_screenshot(driver, width, height, path):
     driver.set_window_size(width, height)
     driver.save_screenshot(absolute_path)
 
-
 if __name__ == '__main__':
     driver = create_driver()
     driver.get('https://ozmds.github.io/minymal/')
-    take_screenshot(driver, 1440, 810, './screenshots/desktop.png')
-    take_screenshot(driver, 1024, 768, './screenshots/tablet.png')
-    take_screenshot(driver, 375, 667, './screenshots/mobile.png')
+    take_screenshot(driver, 1440, 810, './screenshots/' + 'desktop.png')
+    take_screenshot(driver, 1024, 768, './screenshots/' + 'tablet.png')
+    take_screenshot(driver, 375, 667, './screenshots/' + 'mobile.png')
     driver.close()

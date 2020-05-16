@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import CardOptionsDisplay from '../display/CardOptionsDisplay';
+import CardOptionsDisplay from './CardOptionsDisplay';
 
 class CardOptions extends Component {
     constructor(props) {
@@ -23,22 +23,21 @@ class CardOptions extends Component {
 
     onSubmit = () => {
         const sortedIndex = [...this.state.selected].sort((a, b) => a - b);
-        const goalsList = sortedIndex.map((x) => this.props.imageTitles[x]);
-        const otherText = this.props.imageTitles[this.props.imageTitles.length - 1];
-        const otherIndex = goalsList.indexOf(otherText);
+        const cardList = sortedIndex.map((x) => this.props.content.images[x].name);
+        const otherText = this.props.content.images[this.props.content.images.length - 1].name;
+        const otherIndex = cardList.indexOf(otherText);
         if (otherIndex !== -1) {
-            goalsList.splice(otherIndex, 1, '');
+            cardList.splice(otherIndex, 1, '');
         }
-        this.props.submitSelection(goalsList);
+        this.props.submitSelection(cardList.map((card) => ({ name: card, times: [] })));
         this.props.setQuestion(this.props.nextScreen);
     }
 
     render() {
         return (
             <CardOptionsDisplay
-                question={this.props.question}
-                imagePaths={this.props.imagePaths}
-                imageTitles={this.props.imageTitles}
+                id={this.props.id}
+                content={this.props.content}
                 onSubmit={this.onSubmit}
                 manageSelection={this.manageSelection}
                 selected={this.state.selected}
@@ -48,12 +47,11 @@ class CardOptions extends Component {
 }
 
 CardOptions.propTypes = {
-    imagePaths: PropTypes.array,
-    imageTitles: PropTypes.array,
-    nextScreen: PropTypes.string,
-    question: PropTypes.string,
+    id: PropTypes.string,
+    content: PropTypes.object,
     setQuestion: PropTypes.func,
-    submitSelection: PropTypes.func
+    submitSelection: PropTypes.func,
+    nextScreen: PropTypes.string
 };
 
 export default CardOptions;

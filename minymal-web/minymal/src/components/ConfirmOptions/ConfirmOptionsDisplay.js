@@ -23,7 +23,8 @@ const styles = (theme) => ({
     gridItem: {
         display: 'flex'
     },
-    heading: {
+    errorText: {
+        color: 'red',
         marginBottom: '1.5rem'
     },
     input: {
@@ -41,13 +42,18 @@ const styles = (theme) => ({
 function ConfirmOptionsDisplay(props) {
     const { classes } = props;
     return (
-        <Container className={classes.root}>
-            <Typography variant='h5'>
-                {props.question}
+        <Container className={classes.root} id={props.id}>
+            <Typography variant='h5' id={'confirm-question-text'}>
+                {props.content.question}
             </Typography>
-            <Typography className={classes.heading} variant='subtitle1'>
-                {props.subtitle}
+            <Typography variant='subtitle1' id={'confirm-question-additional-text'}>
+                {props.content.additionalText}
             </Typography>
+            {props.error
+                && <Typography className={classes.errorText} variant='subtitle1' id={'confirm-question-error-text'}>
+                    {props.error}
+                </Typography>
+            }
             <Grid
                 spacing={3}
                 container
@@ -57,28 +63,27 @@ function ConfirmOptionsDisplay(props) {
                     <Grid key={i} item xs={12} lg={6} className={classes.gridItem}>
                         <TextField
                             className={classes.input}
-                            id='outlined-basic'
-                            label={`${props.label} ${i + 1}`}
+                            id={`confirm-option-${i + 1}`}
+                            label={`${props.content.fieldLabel} ${i + 1}`}
                             variant='outlined'
                             value={goal}
                             onChange={(e) => props.onChange(e, i)}
                         />
-                        <IconButton onClick={() => props.removeField(i)}>
+                        <IconButton onClick={() => props.removeField(i)} id={`remove-option-${i + 1}`}>
                             <DeleteIcon />
                         </IconButton>
                     </Grid>
                 ))}
-                {props.options.length < props.maxFields
-                    && <Grid item xs={12}>
-                        <Button
-                            style={{ width: '100%', height: '100%' }}
-                            variant='outlined'
-                            onClick={props.addField}
-                        >
-                            <AddIcon />
-                        </Button>
-                    </Grid>
-                }
+                <Grid item xs={12}>
+                    <Button
+                        style={{ width: '100%', height: '100%' }}
+                        variant='outlined'
+                        onClick={props.addField}
+                        id={'add-option'}
+                    >
+                        <AddIcon />
+                    </Button>
+                </Grid>
             </Grid>
             <Button
                 onClick={props.onSubmit}
@@ -86,6 +91,7 @@ function ConfirmOptionsDisplay(props) {
                 color='primary'
                 size='large'
                 className={classes.button}
+                id={'confirm-submit-button'}
             >
                 {'Continue'}
             </Button>
@@ -94,15 +100,14 @@ function ConfirmOptionsDisplay(props) {
 }
 
 ConfirmOptionsDisplay.propTypes = {
-    question: PropTypes.string,
-    subtitle: PropTypes.string,
-    maxFields: PropTypes.number,
-    label: PropTypes.string,
+    id: PropTypes.string,
+    content: PropTypes.object,
     options: PropTypes.array,
     onChange: PropTypes.func,
     onSubmit: PropTypes.func,
     addField: PropTypes.func,
     removeField: PropTypes.func,
+    error: PropTypes.string,
     classes: PropTypes.object
 };
 

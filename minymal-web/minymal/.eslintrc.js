@@ -1,7 +1,8 @@
 module.exports = {
     "extends": [
         "airbnb-base",
-        "plugin:react/recommended"
+        "plugin:react/recommended",
+        "plugin:cypress/recommended"
     ],
     "parser": "babel-eslint",
     "rules": {
@@ -15,6 +16,7 @@ module.exports = {
         "max-lines": ["error", 80]
     },
     "env": {
-        "browser": true
+        "browser": true,
+        "jest": true
     }
 };

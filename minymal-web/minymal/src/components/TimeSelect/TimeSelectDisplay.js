@@ -15,9 +15,10 @@ import Select from '@material-ui/core/Select';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
-import Collapse from './Collapse';
+import Collapse from '../Collapse/Collapse';
+import { getTotalTimeSpent } from './TimeSelectHelper';
 
-const styles = (theme) => ({
+const styles = () => ({
     root: {
         marginTop: '2rem'
     },
@@ -37,7 +38,9 @@ const styles = (theme) => ({
     button: {
         display: 'block',
         width: '100%',
-        marginTop: '1rem'
+        marginTop: '1rem',
+        color: 'red',
+        borderColor: 'red'
     },
     card: {
         marginTop: '1rem',
@@ -45,6 +48,9 @@ const styles = (theme) => ({
         border: '1px solid rgba(0, 0, 0, 0.23)',
         backgroundColor: 'inherit',
         padding: '1rem'
+    },
+    errorText: {
+        color: 'red'
     }
 });
 
@@ -54,16 +60,20 @@ function TimeSelectDisplay(props) {
         <Container className={classes.root}>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <Fragment>
-                    <Typography variant='h5'>
+                    <Typography variant='h5' id={'spent-allocate-question'}>
                         {'When are you doing these activities?'}
                     </Typography>
-                    {props.timeSpenders.map((timeSpender, i) => (
+                    <Typography className={classes.errorText} variant='subtitle1' id={'time-spent-allocate-global-error'}>
+                        {'Insert Error Text Here'}
+                    </Typography>
+                    {props.selectedTime.map((x) => x.name).map((timeSpender, i) => (
                         <Fragment key={i}>
                             <Button
                                 className={classes.button}
                                 size='large'
                                 variant='outlined'
                                 onClick={() => props.changeOpen(i)}
+                                id={`time-spent-tab-${i + 1}`}
                             >
                                 {timeSpender}
                             </Button>
@@ -73,24 +83,28 @@ function TimeSelectDisplay(props) {
                                         spacing={0}
                                         container
                                     >
+                                        <Typography className={classes.errorText} variant='subtitle1' id={`time-spent-allocate-error-${i + 1}`}>
+                                            {'Insert Error Text Here'}
+                                        </Typography>
                                         {props.selectedTime[i].times.map((timesSelected, j) => (
                                             <Grid key={j} item xs={12} className={classes.gridItem}>
-                                                <FormControl style={{ flex: '2' }} variant='outlined' className={classes.input}>
+                                                <FormControl style={{ flex: '2' }} variant='outlined' className={classes.input} error={true}>
                                                     <InputLabel id='demo-simple-select-outlined-label'>{'Days of the Week'}</InputLabel>
                                                     <Select
                                                         labelId='demo-simple-select-outlined-label'
-                                                        id='demo-simple-select-outlined'
+                                                        id={`time-spent-tab-${i + 1}-day-select-${j + 1}`}
                                                         label='Days of the Week'
                                                         multiple
                                                         value={timesSelected.days}
                                                         onChange={
-                                                            (e) => props.onDaysChange(e, i, j)
+                                                            (e) => props.onChange(e.target.value, i, j, 'days')
                                                         }
                                                     >
                                                         {props.weekdays.map((day) => (
                                                             <MenuItem
                                                                 key={day}
                                                                 value={day}
+                                                                id={`time-spent-tab-${i + 1}-day-select-${j + 1}-option-${day}`}
                                                             >
                                                                 {day}
                                                             </MenuItem>
@@ -104,7 +118,9 @@ function TimeSelectDisplay(props) {
                                                     label='Start Time'
                                                     className={classes.input}
                                                     value={timesSelected.startTime}
-                                                    onChange={(e) => props.onStartChange(e, i, j)}
+                                                    onChange={(e) => props.onChange(e, i, j, 'startTime')}
+                                                    id={`time-spent-tab-${i + 1}-start-time-${j + 1}`}
+                                                    error={true}
                                                 />
                                                 <TimePicker
                                                     ampm={true}
@@ -113,12 +129,14 @@ function TimeSelectDisplay(props) {
                                                     label='End Time'
                                                     className={classes.input}
                                                     value={timesSelected.endTime}
-                                                    onChange={(e) => props.onEndChange(e, i, j)}
+                                                    onChange={(e) => props.onChange(e, i, j, 'endTime')}
+                                                    id={`time-spent-tab-${i + 1}-end-time-${j + 1}`}
+                                                    error={true}
                                                 />
-                                                <Typography variant='body1'>
+                                                <Typography variant='body1' id={`time-spent-tab-${i + 1}-time-diff-${j + 1}`}>
                                                     {`Time Spent: ${timesSelected.difference.hours}h, ${timesSelected.difference.minutes}m`}
                                                 </Typography>
-                                                <IconButton onClick={() => props.removeField(i, j)}>
+                                                <IconButton onClick={() => props.removeField(i, j)} id={`time-spent-tab-${i + 1}-remove-${j + 1}`}>
                                                     <DeleteIcon />
                                                 </IconButton>
                                             </Grid>
@@ -128,6 +146,7 @@ function TimeSelectDisplay(props) {
                                                 style={{ width: '90%', height: '100%' }}
                                                 variant='outlined'
                                                 onClick={() => props.addField(i)}
+                                                id={`add-time-period-${i + 1}`}
                                             >
                                                 <AddIcon />
                                             </Button>
@@ -137,8 +156,8 @@ function TimeSelectDisplay(props) {
                             </Collapse>
                         </Fragment>
                     ))}
-                    <Typography variant='h5'>
-                        {`Total Time Spent: ${0}/168 hours in a week.`}
+                    <Typography variant='h5' id={'total-time-spent'}>
+                        {`Total Time Spent: ${getTotalTimeSpent(props.selectedTime)}/168 hours in a week.`}
                     </Typography>
                     <Button
                         onClick={props.onSubmit}
@@ -146,6 +165,7 @@ function TimeSelectDisplay(props) {
                         variant='contained'
                         color='primary'
                         size='large'
+                        id={'time-spent-allocate-submit'}
                     >
                         {'Continue'}
                     </Button>
@@ -156,14 +176,11 @@ function TimeSelectDisplay(props) {
 }
 
 TimeSelectDisplay.propTypes = {
-    timeSpenders: PropTypes.array,
     weekdays: PropTypes.array,
     changeOpen: PropTypes.func,
     openIndex: PropTypes.number,
     selectedTime: PropTypes.array,
-    onDaysChange: PropTypes.func,
-    onStartChange: PropTypes.func,
-    onEndChange: PropTypes.func,
+    onChange: PropTypes.func,
     addField: PropTypes.func,
     removeField: PropTypes.func,
     onSubmit: PropTypes.func,
